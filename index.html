@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <title>Escala de leitura: de Isaías 64 a Apocalipse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    <style>
+:root {
+
+            --papel: #eef1f5;
+
+            --card: #ffffff;
+
+            --tinta: #14202e;
+
+            --suave: #566475;
+
+            --linha: #cdd5de;
+
+            --marinho: #16314f;
+
+            --acento: #1b3a5c;
+
+            --aco: #9fb3c8;
+
+            --destaque: #dce5ef;
+
+            --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+
+            --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+            color-scheme: light;
+
+            box-sizing: border-box;
+
+        }
+
+        html {
+
+            scroll-padding-top: env(safe-area-inset-top, 0px);
+
+        }
+
+        *,
+
+        *::before,
+
+        *::after {
+
+            box-sizing: border-box;
+
+        }
+
+        body {
+
+            margin: 0;
+
+            padding-top: env(safe-area-inset-top, 0px);
+
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+
+            background: var(--papel);
+
+            color: var(--tinta);
+
+            font-family: var(--sans);
+
+            line-height: 1.5;
+
+        }
+
+        main {
+
+            max-width: 780px;
+
+            margin: 0 auto;
+
+            padding: 1.5rem 1.25rem 3.5rem;
+
+        }
+
+        .hoje {
+
+            background: var(--marinho);
+
+            color: #f1f5f9;
+
+            border-radius: 8px;
+
+            padding: 1.75rem 1.5rem 1.5rem;
+
+            margin-bottom: 2rem;
+
+        }
+
+        .hoje-data {
+
+            margin: 0;
+
+            color: var(--aco);
+
+            font-size: .95rem;
+
+            text-transform: capitalize;
+
+        }
+
+        .hoje-leitura {
+
+            font-family: var(--serif);
+
+            font-weight: 600;
+
+            font-size: clamp(2rem, 7vw, 3.25rem);
+
+            line-height: 1.1;
+
+            margin: .35rem 0 1.25rem;
+
+        }
+
+        .hoje-pessoas {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: .75rem 2.5rem;
+
+            margin: 0;
+
+            padding-top: 1rem;
+
+            border-top: 1px solid rgba(159, 179, 200, .35);
+
+        }
+
+        .hoje-pessoas dt {
+
+            color: var(--aco);
+
+            font-size: .85rem;
+
+        }
+
+        .hoje-pessoas dd {
+
+            margin: 0;
+
+            font-size: 1.15rem;
+
+            font-weight: 600;
+
+        }
+
+        .controles {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: .75rem 1.5rem;
+
+            margin-bottom: 1rem;
+
+        }
+
+        .navega {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: .5rem;
+
+        }
+
+        button,
+
+        select {
+
+            font: inherit;
+
+            font-size: .95rem;
+
+            padding: .45rem .8rem;
+
+            border: 1px solid var(--linha);
+
+            border-radius: 6px;
+
+            background: var(--card);
+
+            color: var(--tinta);
+
+        }
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+        button:disabled {
+
+            opacity: .4;
+
+            cursor: default;
+
+        }
+
+        button.principal {
+
+            background: var(--acento);
+
+            border-color: var(--acento);
+
+            color: #fff;
+
+        }
+
+        .filtro {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: .5rem;
+
+            color: var(--suave);
+
+            font-size: .95rem;
+
+        }
+
+        button:focus-visible,
+
+        select:focus-visible {
+
+            outline: 3px solid var(--acento);
+
+            outline-offset: 2px;
+
+        }
+
+        .lista {
+
+            list-style: none;
+
+            margin: 0;
+
+            padding: 0;
+
+            background: var(--card);
+
+            border: 1px solid var(--linha);
+
+            border-radius: 8px;
+
+            overflow: hidden;
+
+        }
+
+        .dia {
+
+            display: grid;
+
+            grid-template-columns: 4rem 1.6fr 1fr 1fr;
+
+            align-items: center;
+
+            gap: .25rem 1rem;
+
+            padding: 1rem .75rem;
+
+            border-bottom: 1px solid var(--linha);
+
+            border-left: 4px solid transparent;
+
+        }
+
+        .dia:last-child {
+
+            border-bottom: 0;
+
+        }
+
+        .dia.e-hoje {
+
+            background: var(--destaque);
+
+            border-left-color: var(--acento);
+
+        }
+
+        .dia.e-apagado {
+
+            opacity: .4;
+
+        }
+
+        .data {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            line-height: 1.1;
+
+        }
+
+        .num {
+
+            font-family: var(--serif);
+
+            font-weight: 600;
+
+            font-size: 1.9rem;
+
+            color: var(--marinho);
+
+        }
+
+        .sem {
+
+            color: var(--suave);
+
+            font-size: .85rem;
+
+        }
+
+        .leitura {
+
+            margin: 0;
+
+            font-family: var(--serif);
+
+            font-size: 1.2rem;
+
+            line-height: 1.25;
+
+        }
+
+        .pessoa {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+        .rotulo {
+
+            color: var(--suave);
+
+            font-size: .8rem;
+
+        }
+
+        .pessoa.e-eu span:last-child {
+
+            font-weight: 600;
+
+            color: var(--acento);
+
+            text-decoration: underline;
+
+            text-underline-offset: 3px;
+
+        }
+
+        @media (max-width: 640px) {
+
+            .dia {
+
+                grid-template-columns: 3.5rem 1fr 1fr;
+
+            }
+
+            .leitura {
+
+                grid-column: 2 / -1;
+
+            }
+
+            .dia> :nth-child(3) {
+
+                grid-column: 2;
+
+            }
+
+            .dia> :nth-child(4) {
+
+                grid-column: 3;
+
+            }
+
+        }
+
+        @media (max-width: 640px) {
+            main {
+                width: 100%;
+                padding: 1rem .75rem 2rem;
+            }
+
+            .hoje {
+                padding: 1.25rem 1rem 1rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .hoje-pessoas {
+                gap: .75rem 1.25rem;
+            }
+
+            .controles {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr);
+                gap: .75rem;
+            }
+
+            .navega {
+                display: grid;
+                grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+                width: 100%;
+                gap: .5rem;
+            }
+
+            .navega > button,
+            .navega > select {
+                min-width: 0;
+                min-height: 44px;
+            }
+
+            #ant,
+            #prox {
+                padding: .45rem;
+                font-size: 1.25rem;
+            }
+
+            #semana {
+                width: 100%;
+            }
+
+            #irhoje {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+
+            .filtro {
+                width: 100%;
+                justify-content: space-between;
+                gap: .75rem;
+            }
+
+            .filtro select {
+                flex: 1 1 0;
+                min-width: 0;
+            }
+
+            .dia {
+                min-width: 0;
+                grid-template-columns: 3.25rem minmax(0, 1fr) minmax(0, 1fr);
+                gap: .4rem .6rem;
+                padding: .85rem .55rem;
+            }
+
+            .dia > *,
+            .pessoa {
+                min-width: 0;
+            }
+
+            .leitura {
+                overflow-wrap: anywhere;
+                font-size: clamp(1.05rem, 4.5vw, 1.2rem);
+            }
+
+            .pessoa span:last-child {
+                overflow-wrap: anywhere;
+            }
+        }
+
+        @media (max-width: 400px) {
+            main {
+                padding: .75rem .6rem 1.75rem;
+            }
+
+            .hoje {
+                padding: 1.1rem .9rem .9rem;
+            }
+
+            .hoje-leitura {
+                font-size: clamp(1.8rem, 8vw, 2.35rem);
+                overflow-wrap: anywhere;
+            }
+
+            .hoje-pessoas {
+                gap: .65rem 1rem;
+            }
+
+            .hoje-pessoas dd {
+                font-size: 1.05rem;
+            }
+
+            .dia {
+                grid-template-columns: 2.8rem minmax(0, 1fr) minmax(0, 1fr);
+                gap: .35rem .45rem;
+                padding: .75rem .4rem;
+            }
+
+            .num {
+                font-size: 1.65rem;
+            }
+
+            .sem {
+                font-size: .75rem;
+            }
+
+            .pessoa {
+                font-size: .9rem;
+            }
+
+            .rotulo {
+                font-size: .72rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<main>
+
+            <header class="hoje">
+
+                <p class="hoje-data" id="hoje-data"></p>
+
+                <h1 class="hoje-leitura" id="hoje-leitura"></h1>
+
+                <dl class="hoje-pessoas">
+
+                    <div>
+
+                        <dt>Explicação</dt>
+
+                        <dd id="hoje-explicacao"></dd>
+
+                    </div>
+
+                    <div>
+
+                        <dt>Intercessor</dt>
+
+                        <dd id="hoje-intercessor"></dd>
+
+                    </div>
+
+                </dl>
+
+            </header>
+
+            <div class="controles">
+
+                <div class="navega">
+
+                    <button type="button" id="ant" aria-label="Semana anterior">‹</button>
+
+                    <select id="semana" aria-label="Semana"></select>
+
+                    <button type="button" id="prox" aria-label="Próxima semana">›</button>
+
+                    <button type="button" id="irhoje" class="principal">Ir para hoje</button>
+
+                </div>
+
+                <label class="filtro">
+
+                    Destacar
+
+                    <select id="pessoa">
+
+                        <option value="">Todos</option>
+
+                    </select>
+
+                </label>
+
+            </div>
+
+            <ul class="lista" id="lista"></ul>
+
+</main>
+
+<script>
+(function () {
+var LIVROS = [
+
+            ["Jeremias", 52],
+
+            ["Lamentações", 5],
+
+            ["Ezequiel", 48],
+
+            ["Daniel", 12],
+
+            ["Oseias", 14],
+
+            ["Joel", 3],
+
+            ["Amós", 9],
+
+            ["Obadias", 1],
+
+            ["Jonas", 4],
+
+            ["Miqueias", 7],
+
+            ["Naum", 3],
+
+            ["Habacuque", 3],
+
+            ["Sofonias", 3],
+
+            ["Ageu", 2],
+
+            ["Zacarias", 14],
+
+            ["Malaquias", 4],
+
+            ["Mateus", 28],
+
+            ["Marcos", 16],
+
+            ["Lucas", 24],
+
+            ["João", 21],
+
+            ["Atos", 28],
+
+            ["Romanos", 16],
+
+            ["1 Coríntios", 16],
+
+            ["2 Coríntios", 13],
+
+            ["Gálatas", 6],
+
+            ["Efésios", 6],
+
+            ["Filipenses", 4],
+
+            ["Colossenses", 4],
+
+            ["1 Tessalonicenses", 5],
+
+            ["2 Tessalonicenses", 3],
+
+            ["1 Timóteo", 6],
+
+            ["2 Timóteo", 4],
+
+            ["Tito", 3],
+
+            ["Filemom", 1],
+
+            ["Hebreus", 13],
+
+            ["Tiago", 5],
+
+            ["1 Pedro", 5],
+
+            ["2 Pedro", 3],
+
+            ["1 João", 5],
+
+            ["2 João", 1],
+
+            ["3 João", 1],
+
+            ["Judas", 1],
+
+            ["Apocalipse", 22]
+
+        ];
+
+        var EXPLICA = ["Alan", "Gil", "Dudu", "Isaque", "Pedro", "Bryan", "Davi", "Lucas"];
+
+        var INTERCEDE = ["Lucas", "Pedro", "Tio Tó", "Alan", "Bryan", "Davi", "Dudu", "Gil", "Isaque"];
+
+        function gerar() {
+
+            var caps = [["Isaías", 64], ["Isaías", 65], ["Isaías", 66]];
+
+            LIVROS.forEach(function (livro) {
+
+                for (var c = 1; c <= livro[1]; c++) {
+
+                    caps.push([livro[0], c]);
+
+                }
+
+            });
+
+            var dias = [];
+
+            var e = 0;
+
+            for (var i = 0; i * 3 < caps.length; i++) {
+
+                var d = new Date(Date.UTC(2026, 10, 16 + i, 12));
+
+                var iso = d.toISOString().slice(0, 10);
+
+                var itens = [];
+
+                var anterior = "";
+
+                caps.slice(i * 3, i * 3 + 3).forEach(function (x) {
+
+                    itens.push(x[0] === anterior ? String(x[1]) : x[0] + " " + x[1]);
+
+                    anterior = x[0];
+
+                });
+
+                var leitura = itens.length > 1
+
+                    ? itens.slice(0, -1).join(", ") + " e " + itens[itens.length - 1]
+
+                    : itens[0];
+
+                var explicacao;
+
+                if (i === 0 || d.getUTCDay() === 0) {
+
+                    explicacao = "Tio Tó";
+
+                } else {
+
+                    explicacao = EXPLICA[e % EXPLICA.length];
+
+                    e++;
+
+                }
+
+                dias.push([
+
+                    iso,
+
+                    explicacao,
+
+                    leitura,
+
+                    INTERCEDE[i % INTERCEDE.length]
+
+                ]);
+
+            }
+
+            return dias;
+
+        }
+
+        var todos = gerar();
+
+        var SEMANAS = [];
+
+        for (var i = 0; i < todos.length; i += 7) {
+
+            SEMANAS.push(todos.slice(i, i + 7));
+
+        }
+
+        function hojeISO() {
+
+            var d = new Date();
+
+            return d.getFullYear() + "-" +
+
+                String(d.getMonth() + 1).padStart(2, "0") + "-" +
+
+                String(d.getDate()).padStart(2, "0");
+
+        }
+
+        function partes(iso) {
+
+            var d = new Date(iso + "T12:00:00");
+
+            return {
+
+                num: d.getDate(),
+
+                curto: d.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", ""),
+
+                longo: d.toLocaleDateString("pt-BR", { weekday: "long" }),
+
+                data: d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })
+
+            };
+
+        }
+
+        function el(tag, cls, txt) {
+
+            var elemento = document.createElement(tag);
+
+            if (cls) elemento.className = cls;
+
+            if (txt !== undefined) elemento.textContent = txt;
+
+            return elemento;
+
+        }
+
+        function tituloSemana(s) {
+
+            var a = partes(s[0][0]).data;
+
+            var b = partes(s[s.length - 1][0]).data;
+
+            return a === b ? a : a + " a " + b;
+
+        }
+
+        var hoje = hojeISO();
+
+        var diaDeHoje = todos.filter(function (d) {
+
+            return d[0] === hoje;
+
+        })[0];
+
+        var rotulo = "Hoje";
+
+        var destaque = diaDeHoje;
+
+        if (!destaque) {
+
+            if (hoje < todos[0][0]) {
+
+                destaque = todos[0];
+
+                rotulo = "Começa em";
+
+            } else {
+
+                destaque = todos[todos.length - 1];
+
+                rotulo = "Último dia";
+
+            }
+
+        }
+
+        function semanaDe(iso) {
+
+            for (var i = 0; i < SEMANAS.length; i++) {
+
+                if (SEMANAS[i].some(function (d) {
+
+                    return d[0] === iso;
+
+                })) {
+
+                    return i;
+
+                }
+
+            }
+
+            return 0;
+
+        }
+
+        var semana = semanaDe(destaque[0]);
+
+        var pessoa = "";
+
+        var p = partes(destaque[0]);
+
+        document.getElementById("hoje-data").textContent =
+
+            rotulo + ", " + p.longo + ", " + p.data;
+
+        document.getElementById("hoje-leitura").textContent = destaque[2];
+
+        document.getElementById("hoje-explicacao").textContent = destaque[1];
+
+        document.getElementById("hoje-intercessor").textContent = destaque[3];
+
+        var nomes = {};
+
+        todos.forEach(function (d) {
+
+            nomes[d[1]] = 1;
+
+            nomes[d[3]] = 1;
+
+        });
+
+        var selPessoa = document.getElementById("pessoa");
+
+        Object.keys(nomes)
+
+            .sort(function (a, b) {
+
+                return a.localeCompare(b, "pt-BR");
+
+            })
+
+            .forEach(function (n) {
+
+                var o = el("option", "", n);
+
+                o.value = n;
+
+                selPessoa.appendChild(o);
+
+            });
+
+        selPessoa.addEventListener("change", function () {
+
+            pessoa = selPessoa.value;
+
+            render();
+
+        });
+
+        var selSemana = document.getElementById("semana");
+
+        SEMANAS.forEach(function (s, i) {
+
+            var o = el("option", "", "Semana " + (i + 1) + ": " + tituloSemana(s));
+
+            o.value = i;
+
+            selSemana.appendChild(o);
+
+        });
+
+        selSemana.addEventListener("change", function () {
+
+            semana = Number(selSemana.value);
+
+            render();
+
+        });
+
+        document.getElementById("ant").addEventListener("click", function () {
+
+            if (semana > 0) {
+
+                semana--;
+
+                render();
+
+            }
+
+        });
+
+        document.getElementById("prox").addEventListener("click", function () {
+
+            if (semana < SEMANAS.length - 1) {
+
+                semana++;
+
+                render();
+
+            }
+
+        });
+
+        document.getElementById("irhoje").addEventListener("click", function () {
+
+            semana = semanaDe(destaque[0]);
+
+            render();
+
+        });
+
+        function render() {
+
+            selSemana.value = semana;
+
+            document.getElementById("ant").disabled = semana === 0;
+
+            document.getElementById("prox").disabled = semana === SEMANAS.length - 1;
+
+            var lista = document.getElementById("lista");
+
+            lista.textContent = "";
+
+            SEMANAS[semana].forEach(function (d) {
+
+                var q = partes(d[0]);
+
+                var explica = pessoa && d[1] === pessoa;
+
+                var intercede = pessoa && d[3] === pessoa;
+
+                var li = el("li", "dia");
+
+                if (d[0] === hoje) li.classList.add("e-hoje");
+
+                if (pessoa && !explica && !intercede) {
+
+                    li.classList.add("e-apagado");
+
+                }
+
+                var data = el("div", "data");
+
+                data.appendChild(el("span", "num", String(q.num)));
+
+                data.appendChild(el("span", "sem", d[0] === hoje ? "hoje" : q.curto));
+
+                li.appendChild(data);
+
+                li.appendChild(el("p", "leitura", d[2]));
+
+                var a = el("div", "pessoa" + (explica ? " e-eu" : ""));
+
+                a.appendChild(el("span", "rotulo", "Explicação"));
+
+                a.appendChild(el("span", "", d[1]));
+
+                li.appendChild(a);
+
+                var b = el("div", "pessoa" + (intercede ? " e-eu" : ""));
+
+                b.appendChild(el("span", "rotulo", "Intercessor"));
+
+                b.appendChild(el("span", "", d[3]));
+
+                li.appendChild(b);
+
+                lista.appendChild(li);
+
+            });
+
+        }
+
+        render();
+
+        })();
+    </script>
+</body>
+</html>
